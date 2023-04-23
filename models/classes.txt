@@ -1,0 +1,5 @@
+barbell
+bench
+dumbell
+kettlebell
+rack

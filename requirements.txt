@@ -2,3 +2,5 @@ torchvision~=0.14.1
 torch~=1.13.1
 torchaudio~=0.13.0
 numpy~=1.23.5
+streamlit
+streamlit-extras
