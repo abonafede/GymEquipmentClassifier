@@ -27,7 +27,7 @@ def recommend():
 
 def save_workout(username,workout):
     if username not in workout_data:
-        workout_data[username] = workout
+        workout_data[username] = [workout]
         with open(WORKOUTS_FILE_PATH, 'w') as f:
             json.dump(workout_data, f)
         st.success("Workout Saved!")
@@ -41,20 +41,35 @@ def save_workout(username,workout):
 def workouts():
     st.title("Recommended Workouts")
     st.markdown("---")
+
+    if 'recommend' not in st.session_state:
+        st.session_state.recommend = False
+        st.session_state.workout = None
+
+    if 'rating' not in st.session_state:
+        st.session_state.rating = False
+
     if not st.session_state.equipment:
         st.markdown("Please upload photos of your equipment to get a recommended workout")
     else:
-        workout = recommend()
+        if not st.session_state.recommend:
+            rec_workout = recommend()
+            st.session_state.workout = rec_workout
+            st.session_state.recommend = True
+        
+        workout = st.session_state.workout
         st.write(pd.DataFrame.from_dict(workout,orient='index'))
-        rating = st.slider("Please rate this workout",
-                            min_value=1,
-                            max_value=5,
-                            value=None,
-                            step=1)
-        submit = st.button('submit')
-        if submit:
-            workout[str(date.today())]['Rating'] = rating
-            save_workout(st.session_state.username,workout)
+        if not st.session_state.rating and st.session_state.is_logged_in:
+            rating = st.slider("Please rate this workout",
+                                min_value=1,
+                                max_value=5,
+                                value=None,
+                                step=1)
+            submit = st.button('submit')
+            if submit:
+                workout[str(date.today())]['Rating'] = rating
+                save_workout(st.session_state.username,workout)
+                st.session_state.rating = True
 
     st.header("Previous Workouts")
     if not st.session_state.is_logged_in:
