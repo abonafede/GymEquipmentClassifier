@@ -88,10 +88,18 @@ def match(array):
         
 def display_exercises():
     st.title("Exercise List")
+    if st.session_state.equipment:
+        if st.button('Recommended Workout'):
+            switch_page('recommendations')
     st.markdown("---")
-    df = pd.read_csv('exercises.csv')
-    df = df.drop('Unnamed: 0',axis=1)
     
+    if 'df' not in st.session_state:
+        df = pd.read_csv('exercises.csv')
+        df = df.drop('Unnamed: 0',axis=1)
+        st.session_state.df = df
+
+    df = st.session_state.df
+
     if st.session_state['equipment'] is not None:
         equip = match(st.session_state['equipment'])
         key = '|'.join(equip)
