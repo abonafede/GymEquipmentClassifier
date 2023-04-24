@@ -2,6 +2,7 @@ import streamlit as st
 import streamlit_authenticator as stauth
 from streamlit_extras.switch_page_button import switch_page
 from pred import predict
+import json
 
 def run_ui():
     st.set_page_config(
@@ -10,10 +11,21 @@ def run_ui():
         layout="wide")
 
     st.title("Workout Helper")
-    st.markdown("""---""")
-    st.markdown("**Upload Files**")
-    st.session_state['equipment'] = None
+    # Initialize the session state
+    if 'is_logged_in' not in st.session_state:
+        st.session_state.is_logged_in = False
+        st.session_state.username = None
+
+    if 'equipment' not in st.session_state:
+        st.session_state['equipment'] = None
     
+    if not st.session_state.is_logged_in:
+        if st.button("Log in"):
+            switch_page('login')
+    else:
+        st.caption('Hello ' + str(st.session_state.username)+'!')
+
+    st.markdown("""---""")
     image_upload = st.file_uploader("Upload images", type=['jpg', 'jpeg', 'png'],accept_multiple_files=True)
     
     equipment = set()
