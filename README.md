@@ -29,7 +29,6 @@ The project data and codes are arranged in the following manner:
     ├── dumbell
     ├── kettlebell
     ├── rack
-├── scratch                             <- directory to store any intermediate and scratch files used
 ├── notebooks                           <- directory to store any exploration notebooks used
 ├── .gitignore                          <- git ignore file
 ```
