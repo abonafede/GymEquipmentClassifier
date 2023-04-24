@@ -12,7 +12,8 @@ def run_ui():
     st.title("Workout Helper")
     st.markdown("""---""")
     st.markdown("**Upload Files**")
-
+    st.session_state['equipment'] = None
+    
     image_upload = st.file_uploader("Upload images", type=['jpg', 'jpeg', 'png'],accept_multiple_files=True)
     
     equipment = set()
