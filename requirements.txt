@@ -4,8 +4,5 @@ numpy
 pandas
 streamlit
 streamlit-extras
-json
 datetime
-PIL
-urllib
-os
+Pillow
