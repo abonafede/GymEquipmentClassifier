@@ -67,7 +67,6 @@ def run_script():
     input_size = config["input_size"]
     learning_rate = config["learning_rate"]
     momentum = config["momentum"]
-
     # set device
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     logging.info(f'Device {device} Being Used.')
