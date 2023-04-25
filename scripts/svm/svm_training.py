@@ -1,3 +1,6 @@
+# Modified from earlier computer vision project.
+# Find here: https://github.com/guptashrey/Content-Moderation-for-Social-Media
+
 # library imports
 import torch
 import torch.nn as nn
