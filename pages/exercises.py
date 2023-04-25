@@ -7,7 +7,8 @@ from pandas.api.types import (
     is_numeric_dtype,
     is_object_dtype,
 )
-
+# NOT MY OWN FUNCTION
+# TAKEN FROM https://blog.streamlit.io/auto-generate-a-dataframe-filtering-ui-in-streamlit-with-filter_dataframe/
 def filter_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     modify = st.checkbox("Add additional filters")
 
